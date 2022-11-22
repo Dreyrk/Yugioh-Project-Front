@@ -58,15 +58,17 @@ const CardDescType = styled.h5`
 `;
 
 function Cards({ cardsData }) {
+  const { Name, Rarity, Description } = cardsData;
+
   return (
     <>
       <CardContainer>
         <TitleRarityContainer>
-          <CardTitle>{cardsData.Name}</CardTitle>
-          <RarityContainer></RarityContainer>
+          <CardTitle>{Name}</CardTitle>
+          <RarityContainer>{Rarity}</RarityContainer>
         </TitleRarityContainer>
         <ImgContainer src="public\src\back-card-yugioh.png"></ImgContainer>
-        <DescContainer></DescContainer>
+        <DescContainer>{Description}</DescContainer>
       </CardContainer>
       <CardBack></CardBack>
     </>
