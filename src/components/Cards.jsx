@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const CardContainer = styled.div`
@@ -30,10 +30,12 @@ const ImgContainer = styled.div`
 `;
 
 const DescContainer = styled.div`
-  height: 90px;
+  height: 150px;
   width: 185px;
   margin: 5px;
   border: 1px solid;
+  overflow: scroll;
+  text-overflow: ellipsis;
 `;
 
 const TitleRarityContainer = styled.div`
@@ -64,7 +66,9 @@ function Cards({ cardsData }) {
     <>
       <CardContainer>
         <TitleRarityContainer>
-          <CardTitle>{Name}</CardTitle>
+          <CardTitle>
+            <h1>{Name}</h1>
+          </CardTitle>
           <RarityContainer>{Rarity}</RarityContainer>
         </TitleRarityContainer>
         <ImgContainer src="public\src\back-card-yugioh.png"></ImgContainer>
