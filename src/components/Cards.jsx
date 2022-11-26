@@ -50,28 +50,27 @@ const RarityContainer = styled.div`
   width: 185px;
 `;
 
-const CardDescType = styled.h5`
-  text-align: center;
-  border-top: none;
-  border-bottom: none;
-  border-left: 2px solid;
-  width: 30%;
-  height: 20px;
-`;
+// const CardDescType = styled.h5`
+//   text-align: center;
+//   border-top: none;
+//   border-bottom: none;
+//   border-left: 2px solid;
+//   width: 30%;
+//   height: 20px;
+// `;
 
 function Cards({ cardsData }) {
   const { Name, Rarity, Description } = cardsData;
+  const filteredName = Name.replace(/\s*\(.*?\)\s*/g, "");
 
   return (
     <>
       <CardContainer>
         <TitleRarityContainer>
-          <CardTitle>
-            <h1>{Name}</h1>
-          </CardTitle>
+          <CardTitle>{filteredName}</CardTitle>
           <RarityContainer>{Rarity}</RarityContainer>
         </TitleRarityContainer>
-        <ImgContainer src="public\src\back-card-yugioh.png"></ImgContainer>
+        <ImgContainer src="public\src\back-card-yugioh.png" />
         <DescContainer>{Description}</DescContainer>
       </CardContainer>
       <CardBack></CardBack>

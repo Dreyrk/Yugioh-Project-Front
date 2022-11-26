@@ -7,6 +7,7 @@ const HomeContainer = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
@@ -14,22 +15,23 @@ const HomeContainer = styled.div`
 function Home() {
   const [cardsData, setCardsData] = useState([]);
 
-  axios({
-    method: "get",
-    url: "/api/cards",
-    baseURL: "http://localhost:5000",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-  })
-    .then((res) => res.data)
-    .then((data) => {
-      setCardsData(data);
-      console.log(cardsData);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/cards",
+      baseURL: "http://localhost:5000",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
     })
-    .catch((err) => {
-      console.error(err);
-    });
+      .then((res) => res.data)
+      .then((data) => {
+        setCardsData(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
 
   return (
     <HomeContainer>

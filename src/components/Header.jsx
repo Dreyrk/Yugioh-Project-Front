@@ -1,13 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../../public/src/logo";
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <div>
-      <NavLink to="/">
-        <img src={logo} alt="Yugioh logo" />
-      </NavLink>
+      <img
+        src={logo}
+        alt="Yugioh logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
     </div>
   );
 }
