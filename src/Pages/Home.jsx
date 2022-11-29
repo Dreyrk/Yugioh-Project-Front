@@ -2,14 +2,34 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cards from "../components/Cards";
 import styled from "styled-components";
+import colors from "../Styles/colors";
+
+const { gold, gold2 } = colors;
 
 const HomeContainer = styled.div`
   height: 100vh;
   width: 100vw;
+  margin-top: 10px;
+  overflow: hidden;
+`;
+
+const DisplayCardsContainer = styled.div`
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 250px 250px 250px;
+  place-items: center;
+`;
+
+const SubTitleContainer = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+`;
+
+const SubTitle = styled.h2`
+  color: ${gold};
+  font-size: x-large;
 `;
 
 function Home() {
@@ -35,9 +55,14 @@ function Home() {
 
   return (
     <HomeContainer>
-      {cardsData.map((val) => {
-        return <Cards cardsData={val} key={val.ID} />;
-      })}
+      <SubTitleContainer>
+        <SubTitle>Trending :</SubTitle>
+      </SubTitleContainer>
+      <DisplayCardsContainer>
+        {cardsData.map((val) => {
+          return <Cards cardsData={val} key={val.ID} />;
+        })}
+      </DisplayCardsContainer>
     </HomeContainer>
   );
 }
