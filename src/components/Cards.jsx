@@ -1,26 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import colors from "../Styles/colors";
+
+const { beige } = colors;
 
 const CardContainer = styled.div`
   height: 400px;
   width: 200px;
-  background-color: #f9e4b7;
+  position: relative;
+  background-color: ${beige};
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid;
+  padding: 4px;
+  box-shadow: 10px 5px 5px black;
 `;
 
 const CardBack = styled.div`
   height: 400px;
-  width: 200px;
+  width: 210px;
+  position: relative;
+`;
+
+const BackImg = styled.img`
+  height: 400px;
+  width: 210px;
 `;
 
 const CardTitle = styled.h5`
   text-align: center;
   border: 1px solid;
-  height: 30px;
+  height: 20px;
   width: 185px;
+  margin-top: 0;
+  margin-bottom: 5px;
 `;
 
 const ImgContainer = styled.div`
@@ -30,50 +44,55 @@ const ImgContainer = styled.div`
 `;
 
 const DescContainer = styled.div`
-  height: 150px;
+  height: 100px;
   width: 185px;
   margin: 5px;
   border: 1px solid;
-  overflow: scroll;
-  text-overflow: ellipsis;
+  overflow-y: scroll;
+`;
+
+const Desc = styled.p`
+  font-size: medium;
 `;
 
 const TitleRarityContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const RarityContainer = styled.div`
   text-align: center;
   border: 1px solid;
-  height: 30px;
+  height: 20px;
   width: 185px;
 `;
-
-// const CardDescType = styled.h5`
-//   text-align: center;
-//   border-top: none;
-//   border-bottom: none;
-//   border-left: 2px solid;
-//   width: 30%;
-//   height: 20px;
-// `;
 
 function Cards({ cardsData }) {
   const { Name, Rarity, Description } = cardsData;
   const filteredName = Name.replace(/\s*\(.*?\)\s*/g, "");
+  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <>
-      <CardContainer>
-        <TitleRarityContainer>
-          <CardTitle>{filteredName}</CardTitle>
-          <RarityContainer>{Rarity}</RarityContainer>
-        </TitleRarityContainer>
-        <ImgContainer src="public\src\back-card-yugioh.png" />
-        <DescContainer>{Description}</DescContainer>
-      </CardContainer>
-      <CardBack></CardBack>
+      {!isClicked ? (
+        <CardBack onMouseEnter={() => setIsClicked(true)}>
+          <BackImg src="./Images/back-card-yugioh.png" alt="card-back" />
+        </CardBack>
+      ) : (
+        <CardContainer onMouseLeave={() => setIsClicked(false)}>
+          <TitleRarityContainer>
+            <CardTitle>{filteredName}</CardTitle>
+            <RarityContainer>{Rarity}</RarityContainer>
+          </TitleRarityContainer>
+          <ImgContainer></ImgContainer>
+          <DescContainer>
+            <Desc>{Description}</Desc>
+          </DescContainer>
+        </CardContainer>
+      )}
     </>
   );
 }
