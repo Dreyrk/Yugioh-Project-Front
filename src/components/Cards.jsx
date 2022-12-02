@@ -7,12 +7,12 @@ const { beige } = colors;
 const CardContainer = styled.div`
   height: 400px;
   width: 200px;
+  position: relative;
   background-color: ${beige};
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid;
-  margin: 10px;
   padding: 4px;
   box-shadow: 10px 5px 5px black;
 `;
@@ -20,13 +20,12 @@ const CardContainer = styled.div`
 const CardBack = styled.div`
   height: 400px;
   width: 210px;
-  margin: 0;
+  position: relative;
 `;
 
 const BackImg = styled.img`
   height: 400px;
   width: 210px;
-  margin: 0;
 `;
 
 const CardTitle = styled.h5`
@@ -49,8 +48,11 @@ const DescContainer = styled.div`
   width: 185px;
   margin: 5px;
   border: 1px solid;
-  overflow: scroll;
-  text-overflow: ellipsis;
+  overflow-y: scroll;
+`;
+
+const Desc = styled.p`
+  font-size: medium;
 `;
 
 const TitleRarityContainer = styled.div`
@@ -73,22 +75,22 @@ function Cards({ cardsData }) {
   const filteredName = Name.replace(/\s*\(.*?\)\s*/g, "");
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleClicked = () => setIsClicked(!isClicked);
-
   return (
     <>
-      {isClicked ? (
-        <CardBack onClick={handleClicked}>
+      {!isClicked ? (
+        <CardBack onMouseEnter={() => setIsClicked(true)}>
           <BackImg src="./Images/back-card-yugioh.png" alt="card-back" />
         </CardBack>
       ) : (
-        <CardContainer>
+        <CardContainer onMouseLeave={() => setIsClicked(false)}>
           <TitleRarityContainer>
             <CardTitle>{filteredName}</CardTitle>
             <RarityContainer>{Rarity}</RarityContainer>
           </TitleRarityContainer>
-          <ImgContainer onClick={handleClicked}></ImgContainer>
-          <DescContainer>{Description}</DescContainer>
+          <ImgContainer></ImgContainer>
+          <DescContainer>
+            <Desc>{Description}</Desc>
+          </DescContainer>
         </CardContainer>
       )}
     </>

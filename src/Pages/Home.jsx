@@ -7,34 +7,61 @@ import colors from "../Styles/colors";
 const { gold, gold2 } = colors;
 
 const HomeContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   margin-top: 10px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 `;
 
 const DisplayCardsContainer = styled.div`
   width: 100%;
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 250px 250px 250px;
-  place-items: center;
+  grid-gap: 15px;
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 250px);
+    place-items: center;
+  }
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(3, 250px);
+    place-items: center;
+  }
+  @media (min-width: 1060px) {
+    grid-template-columns: repeat(4, 250px);
+    place-items: center;
+  }
+  @media (min-width: 1300px) {
+    grid-template-columns: repeat(6, 250px);
+    place-items: center;
+  }
 `;
 
 const SubTitleContainer = styled.div`
-  width: 100%;
+  width: 15%;
+  height: 3rem;
   display: flex;
-  align-items: center;
+  justify-content: end;
+  align-items: flex-end;
+  padding: 5px;
 `;
 
 const SubTitle = styled.h2`
   color: ${gold};
   font-size: x-large;
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 1rem;
+  border-color: darkgray;
+  :hover {
+    background-color: ${gold2};
+    color: black;
+  }
 `;
 
 function Home() {
   const [cardsData, setCardsData] = useState([]);
-
   useEffect(() => {
     axios({
       method: "get",
@@ -51,7 +78,7 @@ function Home() {
       .catch((err) => {
         console.error(err);
       });
-  });
+  }, []);
 
   return (
     <HomeContainer>

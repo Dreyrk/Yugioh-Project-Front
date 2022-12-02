@@ -2,6 +2,9 @@ import Home from "./Pages/Home";
 import styled from "styled-components";
 import Header from "./components/Header";
 import colors from "./Styles/colors";
+import { Route, Routes } from "react-router-dom";
+import Decks from "./Pages/Decks";
+import Rules from "./Pages/Rules";
 
 const { grey } = colors;
 
@@ -15,10 +18,16 @@ const Page = styled.div`
 
 function App() {
   return (
-    <Page>
-      <Header />
-      <Home />
-    </Page>
+    <>
+      <Page>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/decks" element={<Decks />} />
+          <Route path="/rules" element={<Rules />} />
+        </Routes>
+      </Page>
+    </>
   );
 }
 
