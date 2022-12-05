@@ -9,6 +9,8 @@ const MenuContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  z-index: 99;
 `;
 
 const ButtonContainer = styled.div`

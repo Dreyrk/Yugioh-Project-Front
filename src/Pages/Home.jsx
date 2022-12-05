@@ -1,41 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Cards from "../components/Cards";
 import styled from "styled-components";
 import colors from "../Styles/colors";
+import DisplayAll from "../components/DisplayAll";
 
 const { gold, gold2 } = colors;
 
 const HomeContainer = styled.div`
   height: 100%;
-  width: 100%;
+  max-width: 1600px;
   margin-top: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 3rem;
-`;
-
-const DisplayCardsContainer = styled.div`
-  width: 100%;
-  display: grid;
-  grid-gap: 15px;
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(2, 250px);
-    place-items: center;
-  }
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(3, 250px);
-    place-items: center;
-  }
-  @media (min-width: 1060px) {
-    grid-template-columns: repeat(4, 250px);
-    place-items: center;
-  }
-  @media (min-width: 1300px) {
-    grid-template-columns: repeat(6, 250px);
-    place-items: center;
-  }
 `;
 
 const SubTitleContainer = styled.div`
@@ -60,12 +38,34 @@ const SubTitle = styled.h2`
   }
 `;
 
+const PageNav = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+`;
+
+const PageNavButton = styled.button`
+  background-color: ${gold};
+  border: 1px solid;
+  padding: 6px;
+  border-radius: 2rem;
+`;
+
 function Home() {
   const [cardsData, setCardsData] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+  const previousPage = () => {
+    setPage(page - 1);
+  };
+
   useEffect(() => {
     axios({
       method: "get",
-      url: "/api/cards",
+      url: `/api/cards?page=${page}`,
       baseURL: "http://localhost:5000",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -73,23 +73,24 @@ function Home() {
     })
       .then((res) => res.data)
       .then((data) => {
-        setCardsData(data);
+        setCardsData(data.results);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [page]);
 
   return (
     <HomeContainer>
       <SubTitleContainer>
         <SubTitle>Trending :</SubTitle>
       </SubTitleContainer>
-      <DisplayCardsContainer>
-        {cardsData.map((val) => {
-          return <Cards cardsData={val} key={val.ID} />;
-        })}
-      </DisplayCardsContainer>
+      <DisplayAll cards={cardsData} />
+      <PageNav>
+        <PageNavButton onClick={previousPage}>Previous</PageNavButton>
+        <h5>{page}</h5>
+        <PageNavButton onClick={nextPage}>Next</PageNavButton>
+      </PageNav>
     </HomeContainer>
   );
 }
