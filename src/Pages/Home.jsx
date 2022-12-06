@@ -27,9 +27,13 @@ const SubTitleContainer = styled.div`
 
 const SubTitle = styled.h2`
   color: ${gold};
-  font-size: x-large;
+  font-size: xx-large;
+  text-align: center;
   border: 1px solid;
-  padding: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   border-radius: 1rem;
   border-color: darkgray;
   :hover {
@@ -53,15 +57,7 @@ const PageNavButton = styled.button`
 
 function Home() {
   const [cardsData, setCardsData] = useState([]);
-  const [page, setPage] = useState(1);
-
-  const nextPage = () => {
-    setPage(page + 1);
-  };
-  const previousPage = () => {
-    setPage(page - 1);
-  };
-
+  const [page, setPage] = useState(0);
   useEffect(() => {
     axios({
       method: "get",
@@ -80,16 +76,27 @@ function Home() {
       });
   }, [page]);
 
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+  const previousPage = () => {
+    setPage(page - 1);
+  };
+
   return (
     <HomeContainer>
       <SubTitleContainer>
         <SubTitle>Trending :</SubTitle>
       </SubTitleContainer>
-      <DisplayAll cards={cardsData} />
+      <DisplayAll cards={cardsData} page={page} />
       <PageNav>
-        <PageNavButton onClick={previousPage}>Previous</PageNavButton>
-        <h5>{page}</h5>
-        <PageNavButton onClick={nextPage}>Next</PageNavButton>
+        {page > 0 ? (
+          <PageNavButton onClick={previousPage}>Previous</PageNavButton>
+        ) : null}
+        <h5>{page === 0 ? null : page}</h5>
+        {page < 228 ? (
+          <PageNavButton onClick={nextPage}>Next</PageNavButton>
+        ) : null}
       </PageNav>
     </HomeContainer>
   );

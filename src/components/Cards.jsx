@@ -7,7 +7,6 @@ const { beige } = colors;
 const CardContainer = styled.div`
   height: 400px;
   width: 200px;
-  position: relative;
   background-color: ${beige};
   display: flex;
   flex-direction: column;
@@ -29,12 +28,15 @@ const BackImg = styled.img`
 `;
 
 const CardTitle = styled.h5`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid;
-  height: 20px;
+  height: 35px;
   width: 185px;
   margin-top: 0;
   margin-bottom: 5px;
+  font-size: large;
 `;
 
 const ImgContainer = styled.div`
@@ -52,32 +54,36 @@ const DescContainer = styled.div`
 `;
 
 const Desc = styled.p`
-  font-size: medium;
+  font-size: large;
 `;
 
 const TitleRarityContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 40px;
+  height: 85px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
-const RarityContainer = styled.div`
-  text-align: center;
+const RarityContainer = styled.h5`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2px;
+  font-size: large;
   border: 1px solid;
   height: 20px;
   width: 185px;
 `;
 
-function Cards({ cardsData }) {
+function Cards({ cardsData, openAll }) {
   const { Name, Rarity, Description } = cardsData;
   const filteredName = Name.replace(/\s*\(.*?\)\s*/g, "");
   const [isClicked, setIsClicked] = useState(false);
 
   return (
     <>
-      {!isClicked ? (
+      {!isClicked && !openAll ? (
         <CardBack onMouseEnter={() => setIsClicked(true)}>
           <BackImg src="./Images/back-card-yugioh.png" alt="card-back" />
         </CardBack>

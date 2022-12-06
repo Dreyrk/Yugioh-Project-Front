@@ -14,6 +14,7 @@ const Logo = styled.img`
 
 const Title = styled.h1`
   width: 50rem;
+  padding-top: 20px;
   height: 100%;
   color: ${gold};
   text-align: center;

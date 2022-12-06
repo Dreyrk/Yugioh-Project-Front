@@ -1,3 +1,9 @@
 * {
   margin: 0;
 }
+
+@font-face {
+  font-family: "Yu-Gi-Oh"; /*Can be any text*/
+  src: local("Yu-Gi-OhMatrixRegular"),
+    url("./Fonts/Yu-Gi-OhMatrixRegular.ttf") format("truetype");
+}

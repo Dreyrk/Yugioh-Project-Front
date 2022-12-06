@@ -5,6 +5,8 @@ import colors from "./Styles/colors";
 import { Route, Routes } from "react-router-dom";
 import Decks from "./Pages/Decks";
 import Rules from "./Pages/Rules";
+import "./Styles/index.css";
+import "./Styles/Fonts/Yu-Gi-OhMatrixRegular.ttf";
 
 const { grey } = colors;
 
@@ -14,6 +16,7 @@ const Page = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${grey};
+  font-family: "Yu-Gi-Oh";
 `;
 
 function App() {
