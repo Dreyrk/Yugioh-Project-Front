@@ -105,15 +105,14 @@ function Cards({ cardsData, openAll }) {
     }
   };
   const rarityDefine = (rarityNumber) => {
+    const images = [];
     for (let i = 0; i < rarityNumber; i++) {
       images.push({ src: source, alt: "img" });
     }
     return images;
   };
 
-  const images = rarityDefine(rarityNumber(Rarity.substring(8)));
-
-  console.log(images);
+  const images = rarityDefine(rarityNumber(Rarity.substring(9)));
 
   return (
     <>
@@ -126,7 +125,9 @@ function Cards({ cardsData, openAll }) {
           <TitleRarityContainer>
             <CardTitle>{filteredName}</CardTitle>
             <RarityContainer>
-              <RarityImg src={images.src} />
+              {images.map(({ source, alt }) => (
+                <RarityImg src={source} alt={alt} />
+              ))}
             </RarityContainer>
           </TitleRarityContainer>
           <ImgContainer></ImgContainer>

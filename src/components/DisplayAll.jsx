@@ -74,9 +74,9 @@ export default function DisplayAll({ cardsData }) {
       variants={container}
       initial="hidden"
       animate="show">
-      {cardsData.map((val) => {
+      {cardsData.map((val, index) => {
         return (
-          <motion.div key={val.ID.toString()} variants={item}>
+          <motion.div key={index} variants={item}>
             <Cards openAll={openAll} cardsData={val} key={val.ID} />
           </motion.div>
         );
