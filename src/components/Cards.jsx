@@ -125,8 +125,8 @@ function Cards({ cardsData, openAll }) {
           <TitleRarityContainer>
             <CardTitle>{filteredName}</CardTitle>
             <RarityContainer>
-              {images.map(({ source, alt }) => (
-                <RarityImg src={source} alt={alt} />
+              {images.map(({ source, alt }, index) => (
+                <RarityImg key={index} src={source} alt={alt} />
               ))}
             </RarityContainer>
           </TitleRarityContainer>
