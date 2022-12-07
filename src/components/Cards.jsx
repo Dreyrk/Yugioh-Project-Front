@@ -76,10 +76,44 @@ const RarityContainer = styled.h5`
   width: 185px;
 `;
 
+const RarityImg = styled.img`
+  height: 20px;
+  width: 20px;
+`;
+
 function Cards({ cardsData, openAll }) {
   const { Name, Rarity, Description } = cardsData;
   const filteredName = Name.replace(/\s*\(.*?\)\s*/g, "");
   const [isClicked, setIsClicked] = useState(false);
+  const source = "../../public/Images/RarityStar.png";
+
+  const rarityNumber = (filteredRarity) => {
+    if (filteredRarity === "Commune") {
+      return 4;
+    }
+    if (filteredRarity === "Rare") {
+      return 5;
+    }
+    if (filteredRarity === "Super Rare") {
+      return 6;
+    }
+    if (filteredRarity === "Ultra Rare") {
+      return 8;
+    }
+    if (filteredRarity === "Ultimate Rare") {
+      return 10;
+    }
+  };
+  const rarityDefine = (rarityNumber) => {
+    for (let i = 0; i < rarityNumber; i++) {
+      images.push({ src: source, alt: "img" });
+    }
+    return images;
+  };
+
+  const images = rarityDefine(rarityNumber(Rarity.substring(8)));
+
+  console.log(images);
 
   return (
     <>
@@ -91,7 +125,9 @@ function Cards({ cardsData, openAll }) {
         <CardContainer onMouseLeave={() => setIsClicked(false)}>
           <TitleRarityContainer>
             <CardTitle>{filteredName}</CardTitle>
-            <RarityContainer>{Rarity}</RarityContainer>
+            <RarityContainer>
+              <RarityImg src={images.src} />
+            </RarityContainer>
           </TitleRarityContainer>
           <ImgContainer></ImgContainer>
           <DescContainer>

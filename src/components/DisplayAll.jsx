@@ -66,7 +66,7 @@ const container = {
   },
 };
 
-export default function DisplayAll({ cards }) {
+export default function DisplayAll({ cardsData }) {
   const [openAll, setOpenAll] = useState(false);
   return (
     <DisplayCardsContainer
@@ -74,9 +74,9 @@ export default function DisplayAll({ cards }) {
       variants={container}
       initial="hidden"
       animate="show">
-      {cards.map((val) => {
+      {cardsData.map((val) => {
         return (
-          <motion.div variants={item}>
+          <motion.div key={val.ID.toString()} variants={item}>
             <Cards openAll={openAll} cardsData={val} key={val.ID} />
           </motion.div>
         );

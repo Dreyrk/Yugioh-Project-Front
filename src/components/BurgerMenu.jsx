@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../Styles/colors";
+import Clock from "./Clock";
 
 const { gold } = colors;
 
@@ -79,6 +80,7 @@ function BurgerMenu() {
             <StyledLink to="/decks">Decks</StyledLink>
             <StyledLink to="/rules">Rules</StyledLink>
           </ListContainer>
+          <Clock />
         </>
       ) : (
         <MenuContainer>

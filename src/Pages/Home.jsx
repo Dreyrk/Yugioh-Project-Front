@@ -88,7 +88,7 @@ function Home() {
       <SubTitleContainer>
         <SubTitle>Trending :</SubTitle>
       </SubTitleContainer>
-      <DisplayAll cards={cardsData} page={page} />
+      <DisplayAll cardsData={cardsData} page={page} />
       <PageNav>
         {page > 0 ? (
           <PageNavButton onClick={previousPage}>Previous</PageNavButton>
