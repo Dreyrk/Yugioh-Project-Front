@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../Styles/colors";
 import BurgerMenu from "./BurgerMenu";
+import milleniumPuzzle from "../Images/milleniumPuzzle.png";
 
 const { gold } = colors;
 
@@ -37,7 +38,7 @@ function Header() {
   return (
     <HeaderContainer>
       <NavLink to="/">
-        <Logo src="./Images/milleniumPuzzle.png" />
+        <Logo src={milleniumPuzzle} />
       </NavLink>
       <Title>Yugioh Project</Title>
       <MenuContainer>

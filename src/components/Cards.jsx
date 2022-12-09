@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import colors from "../Styles/colors";
+import backCardYugioh from "../Images/backCardYugioh.png";
+import RarityStar from "../Images/RarityStar.svg";
 
 const { beige } = colors;
 
@@ -12,14 +14,12 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   border: 1px solid;
-  padding: 4px;
   box-shadow: 10px 5px 5px black;
 `;
 
 const CardBack = styled.div`
   height: 400px;
   width: 210px;
-  position: relative;
 `;
 
 const BackImg = styled.img`
@@ -85,7 +85,6 @@ function Cards({ cardsData, openAll }) {
   const { Name, Rarity, Description } = cardsData;
   const filteredName = Name.replace(/\s*\(.*?\)\s*/g, "");
   const [isClicked, setIsClicked] = useState(false);
-  const source = "../../public/Images/RarityStar.png";
 
   const rarityNumber = (filteredRarity) => {
     if (filteredRarity === "Commune") {
@@ -107,7 +106,7 @@ function Cards({ cardsData, openAll }) {
   const rarityDefine = (rarityNumber) => {
     const images = [];
     for (let i = 0; i < rarityNumber; i++) {
-      images.push({ src: source, alt: "img" });
+      images.push({ src: RarityStar, alt: "img" });
     }
     return images;
   };
@@ -118,7 +117,7 @@ function Cards({ cardsData, openAll }) {
     <>
       {!isClicked && !openAll ? (
         <CardBack onMouseEnter={() => setIsClicked(true)}>
-          <BackImg src="./Images/back-card-yugioh.png" alt="card-back" />
+          <BackImg src={backCardYugioh} alt="card-back" />
         </CardBack>
       ) : (
         <CardContainer onMouseLeave={() => setIsClicked(false)}>
