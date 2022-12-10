@@ -19,11 +19,17 @@ const Page = styled.div`
   font-family: "Yu-Gi-Oh";
 `;
 
+const HeaderContainer = styled.div`
+  height: 30%;
+`;
+
 function App() {
   return (
     <>
       <Page>
-        <Header />
+        <HeaderContainer>
+          <Header />
+        </HeaderContainer>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/decks" element={<Decks />} />

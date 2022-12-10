@@ -11,27 +11,24 @@ const Logo = styled.img`
   height: 78px;
   width: 78px;
   padding-left: 10px;
+  padding-top: 10px;
 `;
 
 const Title = styled.h1`
-  width: 50rem;
-  padding-top: 20px;
-  height: 100%;
+  width: 100%;
+  height: 100px;
   color: ${gold};
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const HeaderContainer = styled.div`
   background-color: black;
   display: flex;
   justify-content: space-between;
-  height: 100%;
+  height: 100px;
   width: 100%;
-`;
-
-const MenuContainer = styled.div`
-  height: 78px;
-  width: 20%;
 `;
 
 function Header() {
@@ -41,9 +38,7 @@ function Header() {
         <Logo src={milleniumPuzzle} />
       </NavLink>
       <Title>Yugioh Project</Title>
-      <MenuContainer>
-        <BurgerMenu />
-      </MenuContainer>
+      <BurgerMenu />
     </HeaderContainer>
   );
 }

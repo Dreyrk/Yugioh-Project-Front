@@ -7,16 +7,19 @@ import Clock from "./Clock";
 const { gold } = colors;
 
 const MenuContainer = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100px;
+  width: 100px;
+  padding-right: 10px;
   position: sticky;
-  z-index: 99;
 `;
 
 const ButtonContainer = styled.div`
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 50px;
+  align-self: flex-end;
+  padding: 5px;
 `;
 
 const ListContainer = styled.div`
@@ -26,8 +29,8 @@ const ListContainer = styled.div`
   justify-content: space-evenly;
   align-items: flex-end;
   padding-right: 5%;
-  background-color: black;
-  height: 50rem;
+  height: 100%;
+  width: 100%;
 `;
 
 const StyledLink = styled(NavLink)`
@@ -44,10 +47,29 @@ const StyledLink = styled(NavLink)`
   font-size: x-large;
 
   color: ${gold};
-
+  height: 40px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid;
   border-radius: 1rem;
-  padding: 2%;
+  padding-right: 5px;
+  padding-left: 5px;
+`;
+
+const OpenMenuContainer = styled.div`
+  width: 700px;
+  height: 1015px;
+  @media (max-width: 600px) {
+    width: 600px;
+  }
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: sticky;
 `;
 
 function BurgerMenu() {
@@ -58,7 +80,7 @@ function BurgerMenu() {
   return (
     <>
       {isOpen ? (
-        <>
+        <OpenMenuContainer>
           <ButtonContainer>
             <svg
               onClick={handleOpen}
@@ -81,7 +103,7 @@ function BurgerMenu() {
             <StyledLink to="/rules">Rules</StyledLink>
           </ListContainer>
           <Clock />
-        </>
+        </OpenMenuContainer>
       ) : (
         <MenuContainer>
           <svg
