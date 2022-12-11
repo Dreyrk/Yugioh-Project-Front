@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import colors from "../Styles/colors";
 import DisplayAll from "../components/DisplayAll";
+import PageNav from "../components/PageNav";
 
 const { gold, gold2 } = colors;
 
@@ -42,26 +43,14 @@ const SubTitle = styled.h2`
   }
 `;
 
-const PageNav = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-`;
-
-const PageNavButton = styled.button`
-  background-color: ${gold};
-  border: 1px solid;
-  padding: 6px;
-  border-radius: 2rem;
-`;
-
 function Home() {
   const [cardsData, setCardsData] = useState([]);
   const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(0);
   useEffect(() => {
     axios({
       method: "get",
-      url: `/api/cards?page=${page}`,
+      url: `/api/cards?page=${page}&limit=${limit !== 0 && limit}`,
       baseURL: "http://localhost:5000",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -76,28 +65,13 @@ function Home() {
       });
   }, [page]);
 
-  const nextPage = () => {
-    setPage(page + 1);
-  };
-  const previousPage = () => {
-    setPage(page - 1);
-  };
-
   return (
     <HomeContainer>
       <SubTitleContainer>
         <SubTitle>Trending :</SubTitle>
       </SubTitleContainer>
       <DisplayAll cardsData={cardsData} page={page} />
-      <PageNav>
-        {page > 0 ? (
-          <PageNavButton onClick={previousPage}>Previous</PageNavButton>
-        ) : null}
-        <h5>{page === 0 ? null : page}</h5>
-        {page < 228 ? (
-          <PageNavButton onClick={nextPage}>Next</PageNavButton>
-        ) : null}
-      </PageNav>
+      <PageNav page={page} setPage={setPage} />
     </HomeContainer>
   );
 }
