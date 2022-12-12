@@ -27,7 +27,9 @@ export default function PageNav({ setPage, page }) {
           }}>
           Previous
         </PageNavButton>
-      ) : null}
+      ) : (
+        <PageNavButton disabled>Previous</PageNavButton>
+      )}
       <h5>{page === 0 ? null : page}</h5>
       {page < 228 ? (
         <PageNavButton
@@ -36,7 +38,9 @@ export default function PageNav({ setPage, page }) {
           }}>
           Next
         </PageNavButton>
-      ) : null}
+      ) : (
+        <PageNavButton disabled>Next</PageNavButton>
+      )}
     </PageNavContainer>
   );
 }
