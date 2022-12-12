@@ -74,26 +74,30 @@ const StarContainer = styled(motion.div)`
 function Cards({ cardsData, openAll }) {
   const { Name, Rarity, Description } = cardsData;
   const filteredName = Name.replace(/\s*\(.*?\)\s*/g, "");
+  const filteredRarity = Rarity.substring(9);
   const [isClicked, setIsClicked] = useState(false);
 
   //Define Rarity of this card as number of star
-  const rarityNumber = (filteredRarity) => {
-    if (filteredRarity === "Commune") {
-      return 4;
-    }
-    if (filteredRarity === "Rare") {
-      return 5;
-    }
-    if (filteredRarity === "Super Rare") {
-      return 6;
-    }
-    if (filteredRarity === "Ultra Rare") {
-      return 8;
-    }
-    if (filteredRarity === "Ultimate Rare") {
-      return 10;
+  const rarityNumber = (rarity) => {
+    switch (rarity) {
+      case "Commune":
+        return 4;
+      case "Rare":
+        return 5;
+      case "Super Rare":
+        return 6;
+      case "Ultra Rare":
+        return 8;
+      case "Ultimate Rare":
+        return 10;
+
+      default:
+        return 1;
     }
   };
+
+  const rarityAsNumber = rarityNumber(filteredRarity);
+
   const rarityDefine = (rarityNumber) => {
     const images = [];
     for (let i = 0; i < rarityNumber; i++) {
@@ -102,7 +106,7 @@ function Cards({ cardsData, openAll }) {
     return images;
   };
 
-  const images = rarityDefine(rarityNumber(Rarity.substring(9)));
+  const images = rarityDefine(rarityAsNumber);
 
   return (
     <>

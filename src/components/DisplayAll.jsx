@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import colors from "../Styles/colors";
 import "../Styles/Fonts/Yu-Gi-OhMatrixRegular.ttf";
 import "../Styles/index.css";
+import { useContext } from "react";
+import { CardsContext } from "../Context/CardsContext";
 
 const { grey } = colors;
 
@@ -66,23 +68,26 @@ const container = {
   },
 };
 
-export default function DisplayAll({ cardsData }) {
+export default function DisplayAll() {
   const [openAll, setOpenAll] = useState(false);
+
+  const { cardsData } = useContext(CardsContext);
+
   return (
     <DisplayCardsContainer
       className="Cards"
       variants={container}
       initial="hidden"
       animate="show">
-      {cardsData.map((val, index) => {
+      {cardsData.map((val) => {
         return (
-          <motion.div key={index} variants={item}>
-            <Cards openAll={openAll} cardsData={val} key={val.ID} />
+          <motion.div key={val.ID} variants={item}>
+            <Cards openAll={openAll} cardsData={val} />
           </motion.div>
         );
       })}
       <OpenAllButton onClick={() => setOpenAll(!openAll)}>
-        OPEN ALL
+        {openAll ? "CLOSE ALL" : "OPEN ALL"}
       </OpenAllButton>
     </DisplayCardsContainer>
   );

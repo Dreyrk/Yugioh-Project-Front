@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import styled from "styled-components";
 import colors from "../Styles/colors";
-import DisplayAll from "../components/DisplayAll";
-import PageNav from "../components/PageNav";
+import DisplayAll from "../Components/DisplayAll";
+import PageNav from "../Components/PageNav";
 
 const { gold, gold2 } = colors;
 
@@ -43,34 +42,20 @@ const SubTitle = styled.h2`
   }
 `;
 
-function Home() {
-  const [cardsData, setCardsData] = useState([]);
-  const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(0);
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `/api/cards?page=${page}&limit=${limit !== 0 && limit}`,
-      baseURL: "http://localhost:5000",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then((res) => res.data)
-      .then((data) => {
-        setCardsData(data.results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [page]);
+function Home({ page, setPage }) {
+  const itemsOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <HomeContainer>
       <SubTitleContainer>
         <SubTitle>Trending :</SubTitle>
+        <select name="limit">
+          {itemsOptions.map((item, index) => {
+            return <option key={index}>{item}</option>;
+          })}
+        </select>
       </SubTitleContainer>
-      <DisplayAll cardsData={cardsData} page={page} />
+      <DisplayAll page={page} />
       <PageNav page={page} setPage={setPage} />
     </HomeContainer>
   );

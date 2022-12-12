@@ -1,5 +1,5 @@
 import React from "react";
-import DeckBox from "../components/DeckBox";
+import DeckBox from "../Components/DeckBox";
 import styled from "styled-components";
 
 const DeckPage = styled.div`
