@@ -11,25 +11,10 @@ import { CardsContext } from "../Context/CardsContext";
 const { grey } = colors;
 
 const DisplayCardsContainer = styled(motion.div)`
-  max-width: 1600px;
+  margin-left: 20px;
   display: grid;
   grid-gap: 15px;
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(2, 250px);
-    place-items: center;
-  }
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(3, 250px);
-    place-items: center;
-  }
-  @media (min-width: 1060px) {
-    grid-template-columns: repeat(4, 250px);
-    place-items: center;
-  }
-  @media (min-width: 1300px) {
-    grid-template-columns: repeat(6, 250px);
-    place-items: center;
-  }
+  grid-template-columns: repeat(auto-fit, 250px);
 `;
 
 const OpenAllButton = styled.button`

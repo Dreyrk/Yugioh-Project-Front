@@ -56,6 +56,7 @@ const StyledLink = styled(NavLink)`
   border-radius: 1rem;
   padding-right: 5px;
   padding-left: 5px;
+  cursor: pointer;
 `;
 
 const OpenMenuContainer = styled.div`
@@ -72,9 +73,7 @@ const OpenMenuContainer = styled.div`
   position: sticky;
 `;
 
-function BurgerMenu() {
-  const [isOpen, setIsOpen] = useState(false);
-
+function BurgerMenu({ isOpen, setIsOpen }) {
   const handleOpen = () => setIsOpen(!isOpen);
 
   return (
@@ -98,9 +97,15 @@ function BurgerMenu() {
             </svg>
           </ButtonContainer>
           <ListContainer>
-            <StyledLink to="/">Home</StyledLink>
-            <StyledLink to="/decks">Decks</StyledLink>
-            <StyledLink to="/rules">Rules</StyledLink>
+            <StyledLink onClick={handleOpen} to="/">
+              Home
+            </StyledLink>
+            <StyledLink onClick={handleOpen} to="/decks">
+              Decks
+            </StyledLink>
+            <StyledLink onClick={handleOpen} to="/rules">
+              Rules
+            </StyledLink>
           </ListContainer>
           <Clock />
         </OpenMenuContainer>

@@ -14,6 +14,7 @@ const BoxContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
 `;
 
 const DeckTitle = styled.h2`
@@ -32,12 +33,12 @@ const DeckDesc = styled.p`
   background-color: ${gold2};
 `;
 
-export default function DeckBox() {
+export default function DeckBox({ setIsOpen }) {
   return (
-    <BoxContainer>
+    <BoxContainer onClick={() => setIsOpen(true)}>
       <DeckTitle>Deck Name</DeckTitle>
       <DeckImgContainer></DeckImgContainer>
-      <DeckDesc></DeckDesc>
+      <DeckDesc>Desc Test</DeckDesc>
     </BoxContainer>
   );
 }

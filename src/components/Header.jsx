@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../Styles/colors";
@@ -32,13 +32,14 @@ const HeaderContainer = styled.div`
 `;
 
 function Header() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <HeaderContainer>
       <NavLink to="/">
         <Logo src={milleniumPuzzle} />
       </NavLink>
       <Title>Yugioh Project</Title>
-      <BurgerMenu />
+      <BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
     </HeaderContainer>
   );
 }

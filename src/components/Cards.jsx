@@ -3,6 +3,8 @@ import styled from "styled-components";
 import colors from "../Styles/colors";
 import backCardYugioh from "../Images/backCardYugioh.png";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import axios from "axios";
 
 const { beige } = colors;
 

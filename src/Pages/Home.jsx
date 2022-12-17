@@ -17,15 +17,16 @@ const HomeContainer = styled.div`
 `;
 
 const SubTitleContainer = styled.div`
-  width: 15%;
-  height: 3rem;
+  width: 95%;
+  height: 100px;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: flex-end;
-  padding: 5px;
+  margin-left: 20px;
 `;
 
 const SubTitle = styled.h2`
+  height: 2.5rem;
   color: ${gold};
   font-size: xx-large;
   text-align: center;
@@ -42,18 +43,23 @@ const SubTitle = styled.h2`
   }
 `;
 
+const SelectItems = styled.select`
+  height: 20px;
+  width: 6rem;
+`;
+
 function Home({ page, setPage }) {
-  const itemsOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const itemsOptions = ["Monster", "Magic", "Trap"];
 
   return (
     <HomeContainer>
       <SubTitleContainer>
-        <SubTitle>Trending :</SubTitle>
-        <select name="limit">
+        <SubTitle>All Cards :</SubTitle>
+        <SelectItems>
           {itemsOptions.map((item, index) => {
             return <option key={index}>{item}</option>;
           })}
-        </select>
+        </SelectItems>
       </SubTitleContainer>
       <DisplayAll page={page} />
       <PageNav page={page} setPage={setPage} />
