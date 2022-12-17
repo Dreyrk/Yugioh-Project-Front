@@ -2,18 +2,24 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../Styles/colors";
+import Clock from "./Clock";
 
 const { gold } = colors;
 
 const MenuContainer = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100px;
+  width: 100px;
+  padding-right: 10px;
+  position: sticky;
 `;
 
 const ButtonContainer = styled.div`
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 50px;
+  align-self: flex-end;
+  padding: 5px;
 `;
 
 const ListContainer = styled.div`
@@ -23,8 +29,8 @@ const ListContainer = styled.div`
   justify-content: space-evenly;
   align-items: flex-end;
   padding-right: 5%;
-  background-color: black;
-  height: 50rem;
+  height: 100%;
+  width: 100%;
 `;
 
 const StyledLink = styled(NavLink)`
@@ -41,21 +47,39 @@ const StyledLink = styled(NavLink)`
   font-size: x-large;
 
   color: ${gold};
-
+  height: 40px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid;
   border-radius: 1rem;
-  padding: 2%;
+  padding-right: 5px;
+  padding-left: 5px;
+  cursor: pointer;
 `;
 
-function BurgerMenu() {
-  const [isOpen, setIsOpen] = useState(false);
+const OpenMenuContainer = styled.div`
+  width: 700px;
+  height: 1015px;
+  @media (max-width: 600px) {
+    width: 600px;
+  }
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: sticky;
+`;
 
+function BurgerMenu({ isOpen, setIsOpen }) {
   const handleOpen = () => setIsOpen(!isOpen);
 
   return (
     <>
       {isOpen ? (
-        <>
+        <OpenMenuContainer>
           <ButtonContainer>
             <svg
               onClick={handleOpen}
@@ -73,11 +97,18 @@ function BurgerMenu() {
             </svg>
           </ButtonContainer>
           <ListContainer>
-            <StyledLink to="/">Home</StyledLink>
-            <StyledLink to="/decks">Decks</StyledLink>
-            <StyledLink to="/rules">Rules</StyledLink>
+            <StyledLink onClick={handleOpen} to="/">
+              Home
+            </StyledLink>
+            <StyledLink onClick={handleOpen} to="/decks">
+              Decks
+            </StyledLink>
+            <StyledLink onClick={handleOpen} to="/rules">
+              Rules
+            </StyledLink>
           </ListContainer>
-        </>
+          <Clock />
+        </OpenMenuContainer>
       ) : (
         <MenuContainer>
           <svg
